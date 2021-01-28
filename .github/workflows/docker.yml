@@ -21,9 +21,17 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
       - uses: actions/checkout@v2
-
+        
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: nodehubacr.azurecr.io/rpecor/nodehubaz
+          tag_with_ref: true
       # Runs a single command using the runners shell
-      - name: docker build
-        run: |
-          docker build . -t rpecor/nodehubaz:0.0.1
+      # - name: docker build
+      #   run: |
+      #    docker build . -t rpecor/nodehubaz:0.0.1
