@@ -17,9 +17,9 @@ on:
         default: 'manual'
 env:
   REGISTRY_NAME: nodehubacr
-  #CLUSTER_NAME: nodeHubAcr
-  #CLUSTER_RESOURCE_GROUP: {resource-group-name}
-  #NAMESPACE: {namespace-name}
+  CLUSTER_NAME: nodeHubAz
+  CLUSTER_RESOURCE_GROUP: nodeHub
+  NAMESPACE: nodeHubInit
   APP_NAME: nodehubaz
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -45,4 +45,14 @@ jobs:
       - run: |
           docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
           docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-
+   
+   # connect to aks
+      - uses: azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+    
+    # Create namespace if doesn't exist
+      - run: |
+          kubectl create namespace ${{ env.NAMESPACE }} --dry-run -o json | kubectl apply -f -
