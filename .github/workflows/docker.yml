@@ -19,7 +19,7 @@ env:
   REGISTRY_NAME: nodehubacr
   CLUSTER_NAME: nodeHubAz
   CLUSTER_RESOURCE_GROUP: nodeHub
-  NAMESPACE: nodeHubInit
+  NAMESPACE: nodehubinit
   APP_NAME: nodehubaz
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
