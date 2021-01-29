@@ -6,5 +6,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
+    targetPort: 9376
   selector:
     app: nodehubaz
