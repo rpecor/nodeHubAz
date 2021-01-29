@@ -23,7 +23,7 @@ spec:
       - name: nodehubaz
         image: nodehubacr.azurecr.io/nodehubaz:latest
         ports:
-        - containerPort: 80
+        - containerPort: 4000
         resources:
           requests:
             cpu: 250m
