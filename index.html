@@ -8,9 +8,17 @@
      Node Workshop
    </title>
  </head>
+ <script type="text/javascript">
+  function f() {
+    var t = document.getElementById("input").value;
+    document.getElementById("outputtext").innerHTML = "Hello " + t;
+  }
+ </script>
  <body>
-   <h1>
-     HELLO WORLD
-   </h1>
+  <h1 id="outputtext"></h1>
+  <div id="box">
+    <input type="text" id="input" placeholder="Enter name" autocapitalize="off" />
+    <button onclick="f()" type="button" id="submitbutton">Click Me!</button>
+  </div>
  </body>
 </html>
